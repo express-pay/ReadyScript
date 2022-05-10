@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Экспресс платежи</name>
+        <description multilanguage="true">Приём платежей через сервис «Экспресс платежи»</description>
+        <version>1.0.1</version>
+        <author>OOO «ТриИнком»</author>
+        <is_use_signature_for_notification>1</is_use_signature_for_notification>
+        <api_url>https://api.express-pay.by/v1/</api_url>
+        <sandbox_url>https://sandbox-api.express-pay.by/v1/</sandbox_url>
+    </defaultValues>
+</config>
