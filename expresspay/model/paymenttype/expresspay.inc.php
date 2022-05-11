@@ -106,7 +106,7 @@ class ExpressPay extends \Shop\Model\PaymentType\AbstractType
             'is_test_mode' => new Type\Integer([
                 'description' => t('Использовать тестовый режим?'),
                 'maxLength' => 1,
-                'default' => 0,
+                'default' => 1,
                 'CheckboxView' => [1,0]
             ]),
             'token' => new Type\Varchar([
@@ -136,7 +136,7 @@ class ExpressPay extends \Shop\Model\PaymentType\AbstractType
             'is_show_qr_code' => new Type\Integer([
                 'description' => t('Показывать QR код для оплаты'),
                 'maxLength' => 1,
-                'default' => 0,
+                'default' => 1,
                 'CheckboxView' => [1,0]
             ]),
             'is_name_editable' => new Type\Integer([
@@ -300,10 +300,10 @@ class ExpressPay extends \Shop\Model\PaymentType\AbstractType
                 $signature = $request->post('Signature', TYPE_STRING, '');
     
                 $config = \RS\Config\Loader::byModule($this);
-                $useSignatureForNotification = $config['is_use_signature_for_notification'] ? true : false;
+                $useSignatureForNotification = $config['is_use_signature_for_notification'];
                 $secretWordForNotification = $config['secret_word_for_notification'];
     
-                if ($useSignatureForNotification || self::computeSignature(array("data" => $dataJSON), $secretWordForNotification, 'notification') == $signature) {
+                if ($useSignatureForNotification == 0 || self::computeSignature(array("data" => $dataJSON), $secretWordForNotification, 'notification') == $signature) {
                     try {
                         $data = json_decode($dataJSON, true); 
                     }
